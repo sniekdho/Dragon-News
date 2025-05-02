@@ -1,10 +1,10 @@
 import React, { use } from "react";
 import { NavLink } from "react-router";
 
-const fetchCategory = fetch("/categories.json").then((res) => res.json());
+const categoryPromise = fetch("/categories.json").then((res) => res.json());
 
 const Categories = () => {
-  const categories = use(fetchCategory);
+  const categories = use(categoryPromise);
 
   return (
     <div>
