@@ -1,10 +1,10 @@
 import React from "react";
 import { Outlet } from "react-router";
-import Header from "../components/Header";
-import LatestNews from "../components/LatestNews";
-import Navbar from "../components/Navbar";
-import LeftAside from "../components/HomeLayout/LeftAside";
-import RightAside from "../components/HomeLayout/RightAside";
+import Header from "../components/HeaderLayouts/Header";
+import LatestNews from "../components/HeaderLayouts/LatestNews";
+import Navbar from "../components/HeaderLayouts/Navbar";
+import LeftAside from "../components/MainLayouts/LeftAside/LeftAside";
+import RightAside from "../components/MainLayouts/RightAside/RightAside";
 
 const RootLayout = () => {
   return (

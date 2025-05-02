@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router";
-import user from "../assets/user.png";
+import user from "../../assets/user.png";
 
 const Navbar = () => {
   return (
