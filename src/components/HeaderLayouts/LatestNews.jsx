@@ -17,7 +17,9 @@ const LatestNews = () => {
       <Marquee pauseOnHover={true} speed={60}>
         <div className="flex gap-5">
           {breakingNewsData.map((breakingNews) => (
-            <p className="font-bold">{breakingNews.title}.&emsp;</p>
+            <p className="font-bold" key={breakingNews.id}>
+              {breakingNews.title}.&emsp;
+            </p>
           ))}
         </div>
       </Marquee>
