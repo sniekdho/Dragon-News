@@ -67,7 +67,7 @@ const NewsCard = ({ news }) => {
 
       {/* Details */}
       <p className="text-sm text-gray-700">
-        {details.length > 200 ? details.slice(0, 150) + "..." : details}
+        {details.length > 200 ? details.slice(0, 200) + "..." : details}
         <span className="text-blue-600 ml-1 cursor-pointer hover:underline">
           Read More
         </span>
