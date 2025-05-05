@@ -1,9 +1,11 @@
 import { FaEye, FaRegBookmark } from "react-icons/fa";
 import { FiShare2 } from "react-icons/fi";
 import { AiFillStar } from "react-icons/ai";
+import { Link } from "react-router";
 
 const NewsCard = ({ news }) => {
-  const { title, author, thumbnail_url, details, rating, total_view } = news;
+  const { id, title, author, thumbnail_url, details, rating, total_view } =
+    news;
 
   const formattedDate = new Date(author.published_date).toLocaleDateString(
     "en-US",
@@ -68,9 +70,12 @@ const NewsCard = ({ news }) => {
       {/* Details */}
       <p className="text-sm text-gray-700">
         {details.length > 200 ? details.slice(0, 200) + "..." : details}
-        <span className="text-blue-600 ml-1 cursor-pointer hover:underline">
+        <Link
+          to={`/news-details/${id}`}
+          className="text-blue-600 ml-1 cursor-pointer hover:underline"
+        >
           Read More
-        </span>
+        </Link>
       </p>
 
       {/* Footer: Rating & Views */}
