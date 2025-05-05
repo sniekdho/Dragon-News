@@ -1,4 +1,4 @@
-import React, { use } from "react";
+import React, { use, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router";
 import { AuthContext } from "../contexts/AuthContext";
 
@@ -7,6 +7,8 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const [errorMessage, setErrorMessage] = useState("");
+
   const handleLogin = (e) => {
     e.preventDefault();
 
@@ -14,14 +16,12 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
 
-    console.log(email, password);
-
     loginUser(email, password)
       .then(() => {
         navigate(location?.state || "/");
       })
       .catch((error) => {
-        alert(error.message);
+        setErrorMessage(error.message);
       });
   };
 
@@ -40,6 +40,7 @@ const Login = () => {
               type="email"
               className="input"
               placeholder="Email"
+              required
             />
 
             {/* Password */}
@@ -49,6 +50,7 @@ const Login = () => {
               type="password"
               className="input"
               placeholder="Password"
+              required
             />
 
             {/* Forget Password */}
@@ -60,6 +62,11 @@ const Login = () => {
             <button type="submit" className="btn btn-neutral mt-4">
               Login
             </button>
+
+            {/* Error Message */}
+            {errorMessage && (
+              <p className="text-red-500 text-xs">{errorMessage}</p>
+            )}
 
             {/* Go To Register */}
             <p className="text-center font-semibold py-5">

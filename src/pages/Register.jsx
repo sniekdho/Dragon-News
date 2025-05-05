@@ -1,23 +1,41 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../contexts/AuthContext";
 
 const Register = () => {
-  const { createUser } = useContext(AuthContext);
+  const { setUser, createUser, updateUserProfile } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  const [nameError, setNameError] = useState("");
 
   const handleRegister = (e) => {
     e.preventDefault();
 
     const form = e.target;
     const name = form.name.value;
+    if (name.length < 5) {
+      setNameError("Name should be more than 5 characters");
+      return;
+    } else {
+      setNameError("");
+    }
+
     const photo = form.photo.value;
     const email = form.email.value;
     const password = form.password.value;
 
     createUser(email, password)
-      .then(() => {
-        navigate("/");
+      .then((result) => {
+        const user = result.user;
+        updateUserProfile({ displayName: name, photoURL: photo })
+          .then(() => {
+            setUser({ ...user, displayName: name, photoURL: photo });
+            navigate("/");
+          })
+          .catch((error) => {
+            console.log(error);
+            setUser(user);
+          });
       })
       .catch((error) => {
         alert(error.message);
@@ -40,6 +58,8 @@ const Register = () => {
               className="input"
               placeholder="Name"
             />
+
+            {nameError && <p className="text-red-500 text-xs">{nameError}</p>}
 
             {/* Photo URL */}
             <label className="label">Photo URL</label>

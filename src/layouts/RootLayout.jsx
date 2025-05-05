@@ -1,12 +1,15 @@
 import React from "react";
-import { Outlet } from "react-router";
+import { Outlet, useNavigation } from "react-router";
 import Header from "../components/HeaderLayouts/Header";
 import LatestNews from "../components/HeaderLayouts/LatestNews";
 import Navbar from "../components/HeaderLayouts/Navbar";
 import LeftAside from "../components/MainLayouts/LeftAside/LeftAside";
 import RightAside from "../components/MainLayouts/RightAside/RightAside";
+import Spinner from "../components/Spinner";
 
 const RootLayout = () => {
+  const { state } = useNavigation();
+
   return (
     <div>
       <header>
@@ -27,7 +30,7 @@ const RootLayout = () => {
         </aside>
 
         <section className="col-span-6">
-          <Outlet></Outlet>
+          {state == "loading" ? <Spinner /> : <Outlet></Outlet>}
         </section>
 
         <aside className="col-span-3 sticky top-0 h-fit">
